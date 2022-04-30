@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "645116852352",
+    "project_id": "flutter-firebase-sign",
+    "storage_bucket": "flutter-firebase-sign.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645116852352:android:0d949fb0d03f51cc300e65",
+        "android_client_info": {
+          "package_name": "com.devdev225.signinmailpasswordforgotpassword"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645116852352-772qrlt1r9laqrg991ln333a4i4pqo6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_zSn5QF_0dhaAquS4SDoTHhLtGdRKEtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645116852352-772qrlt1r9laqrg991ln333a4i4pqo6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
