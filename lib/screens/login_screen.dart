@@ -98,7 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     autofocus: false,
                     controller: emailController,
                     decoration: InputDecoration(
-                      filled: true,
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -112,13 +113,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                    vertical: 20.0,
+                    vertical: 10.0,
                   ),
                   child: TextFormField(
                     autofocus: false,
                     controller: passwordController,
                     decoration: InputDecoration(
-                      filled: true,
+                      labelText: 'Mot de passe',
+                      border: OutlineInputBorder(),
                     ),
                     obscureText: true,
                     validator: (value) {
