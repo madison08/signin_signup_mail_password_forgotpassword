@@ -25,8 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   userLogin() async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.trim(), password: password.trim());
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(

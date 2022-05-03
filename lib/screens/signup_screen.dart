@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
@@ -18,9 +19,76 @@ class _SignupScreenState extends State<SignupScreen> {
   var password = '';
   var confirmPassword = '';
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  registration() async {
+    // if (password == confirmPassword) {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: email.trim(), password: password.trim());
+      print(userCredential);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.blueGrey,
+          content: Text(
+            "Enregistrer avec success, svp connectez-vous",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ),
+      );
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return LoginScreen();
+      }));
+    } on FirebaseException catch (err) {
+      if (err.code == "weak-password") {
+        print('Mot de passe est faible');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.blueGrey,
+            content: Text(
+              "Mot de passe est faible",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        );
+      } else if (err.code == "email-already-in-use") {
+        print('le compte existe deja');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.blueGrey,
+            content: Text(
+              "Ce compte existe deja",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +179,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            email = emailController.text;
+                            password = passwordController.text;
+                            confirmPassword = confirmPasswordController.text;
+                          });
+                          registration();
+                        }
+                      },
                       child: Text(
                         'S\'inscrire',
                       ),
